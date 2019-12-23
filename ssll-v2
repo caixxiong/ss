@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# caixiong 2019/12/07
+
+lpo=1080                # local port
+lip="127.0.0.1"         # local address
+timeout=300             # timeout
+method="aes-256-cfb"    # method
+
+ips=(
+    "136.244.71.209"  # London CentOS
+    "45.63.83.235"    # USA Silicon Valley Ubuntu
+    "155.138.214.176" # USA Atlanta Ubuntu
+    )
+ips6=(
+    "2001:19f0:7402:1d36:5400:02ff:fe73:4f4e"    # London CentOS
+    "2001:19f0:ac01:16c9:5400:02ff:fe71:835c"    # USA Silicon Valley Ubuntu
+    "2001:19f0:5401:284e:5400:02ff:fe73:94a4"    # USA Atlanta Ubuntu
+    )
+# $1: on for start, off for stop , re for restart
+D="start"
+if [ "$1" == "off" ]; then
+    D="stop"
+elif [ "$1" == "re" ]; then
+    D="restart"
+fi
+
+# $2: ip version, 4, 6
+if [ "$2" != "4" -a "$2" != "6" ]; then
+    echo "your ip version parmater \$2=$2, is not valid!!"
+    exit -1
+fi
+if [ "$2" = "6" ]; then
+    ips=(${ips6[*]})    # 加外面的括弧是将其转换回数组, 不然[*]获得的是字符串
+fi
+
+# $3 server index, 0, 1, .., len(ips) - 1
+if [ $3 -lt 0 -o $3 -gt ${#ips[@]} ]; then
+    echo "your ip server index parmater \$3=$2, is not valid!!"
+    exit -1
+fi
+ip=${ips[$3]}
+
+# $4: port, 1 2 3
+if [ "$4" != "1" -a "$4" != "2" -a "$4" != "3" ]; then
+    echo "your server port parmater \$4=$2, is not valid!!"
+    exit -1
+fi
+spo="5550"$4
+pw="gg${spo}gg"
+
+printf "ip=%s  port=%s\n\n" $ip $spo
+sslocal -s $ip -p $spo -b $lip -l $lpo -k $pw -m $method -t $timeout -d $D
+

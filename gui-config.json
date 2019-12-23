@@ -1,0 +1,20 @@
+{
+    "configs": [
+        {
+            "method": "aes-256-cfb",
+            "password": "gg55501gg",
+            "remarks": "pp4",
+            "server": "45.63.83.235",
+            "server_port": 55501
+        },
+        {
+            "method": "aes-256-cfb",
+            "password": "gg55501gg",
+            "remarks": "pp6",
+            "server": "2001:19f0:ac01:16c9:5400:02ff:fe71:835c",
+            "server_port": 55501
+        }
+    ],
+    "localPort": 1080,
+    "shareOverLan": false
+}

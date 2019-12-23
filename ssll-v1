@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# caixiong 2018/12/14
+#if [ "$1" == "on" ]; then
+#    if [ $2 == 1 ]; then
+#        sslocal -c /etc/shadowsocks.json -d start
+#    elif [ $2 == 2 ]; then
+#        sslocal -c /etc/shadowsocks2.json -d start
+#    fi
+#elif [ "$1" == "off" ]; then
+#    if [ $2 == 1 ]; then
+#        sslocal -c /etc/shadowsocks.json -d stop
+#    elif [ $2 == 2 ]; then
+#        sslocal -c /etc/shadowsocks2.json -d stop
+#    fi
+#fi
+
+# caixiong 2019/02/23
+if [ "$1" == "on" ]; then
+    sslocal -c "/etc/shadowsocks$2.json" -d start
+elif [ "$1" == "off" ]; then
+        sslocal -c "/etc/shadowsocks$2.json" -d stop
+fi

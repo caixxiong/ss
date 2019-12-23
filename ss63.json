@@ -1,0 +1,8 @@
+{
+    "server":"2001:19f0:ac01:16c9:5400:02ff:fe71:835c",
+    "server_port":55503,
+    "local_port":1080,
+    "password":"gg55503gg",
+    "timeout":300,
+    "method":"aes-256-cfb"
+}

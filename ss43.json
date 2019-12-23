@@ -1,0 +1,8 @@
+{
+    "server":"45.63.83.235 ",
+    "server_port":55503,
+    "local_port":1080,
+    "password":"gg55503gg",
+    "timeout":300,
+    "method":"aes-256-cfb"
+}
