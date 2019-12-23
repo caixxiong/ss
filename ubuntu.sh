@@ -27,8 +27,7 @@ printf "INSTALL NET-TOOLS FINISHED!!\n\n"
 
 # 安装BBR加速TCP协议
 if [ ! -f "bbr.sh" ]; then
-    printf "Downloading BBR ...\n"
-    wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh >> log
+    printf "Downloading BBR ...\n" wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh >> log
     chmod +x bbr.sh
     ./bbr.sh >> log
 fi
@@ -98,32 +97,8 @@ cat >> /etc/hosts << EOF
 2401:3800:4001:10::101f scholar.google.cn
 EOF
 
-cat >> /usr/bin/sss << EOF
-#!/bin/bash
-
-ulimit -n 51200
-
-pro="/etc/shadowsocks"
-op="start"
-ip=4
-
-if [ $# -ne 1 -a $# -ne 2 ]; then
-    echo "param num=$# is not valid!!"
-    exit 1
-fi
-
-if [ "$1" = "off" ]; then
-    op="stop"
-elif [ "$1" = "res" ];  then
-    op="restart"
-fi
-
-if [ "$2" = "6" ]; then
-    ip=$2
-fi
-
-ssserver -c ${pro}${ip}'.json' -d $op
-EOF
+# 获取sss文件
+curl https://raw.githubusercontent.com/caixxiong/ss/master/sss -o /usr/bin/sss
 chmod +x /usr/bin/sss
 
 sss on 4
